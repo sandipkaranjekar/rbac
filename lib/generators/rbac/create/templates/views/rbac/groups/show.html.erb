@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @group.description %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @group.is_active %>
+</p>
+
+<%= link_to 'Edit', edit_rbac_group_path(@group) %> |
+<%= link_to 'Back', rbac_groups_path %>

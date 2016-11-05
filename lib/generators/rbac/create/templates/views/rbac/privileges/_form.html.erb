@@ -1,0 +1,39 @@
+<%= form_for(@privilege) do |f| %>
+  <% if @privilege.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@privilege.errors.count, "error") %> prohibited this privilege from being saved:</h2>
+
+      <ul>
+      <% @privilege.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :controller %><br>
+    <%= f.text_field :controller %>
+  </div>
+  <div>
+    <%= f.label :action %><br>
+    <%= f.text_field :action %>
+  </div>
+  <div>
+    <label>
+      <%= f.check_box :is_active %>Is active
+    </label>
+  </div>
+  <div>
+    <%= f.submit "Submit" %>
+    <%= link_to 'Back', rbac_privileges_path %>
+  </div>
+<% end %>

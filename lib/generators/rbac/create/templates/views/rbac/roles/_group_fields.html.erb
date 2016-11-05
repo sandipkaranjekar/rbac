@@ -1,0 +1,29 @@
+<% @groups.each do |group| %>
+	<% @flag = false %>
+	<% if action_name == "edit" %>
+		<!-- #TODO refactor -->
+		<% @role_groups.each do |role_group|
+			if role_group.id == group.id
+				@flag = true
+				break
+			else
+				@flag = false
+			end
+		end %>
+	<% end %>
+	<% if @flag %>
+	<div>
+		<label>
+			<%= check_box_tag 'group_ids[]', group.id , :checked => "checked" %>
+			<%= h group.name %>
+		</label>
+	</div>
+	<% else %>
+	<div>
+		<label>
+			<%= check_box_tag 'group_ids[]', group.id %>
+			<%= h group.name %>
+		</label>
+	</div>
+	<% end %>
+<% end %>

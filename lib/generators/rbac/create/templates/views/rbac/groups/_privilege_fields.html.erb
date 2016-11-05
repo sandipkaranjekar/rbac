@@ -1,0 +1,27 @@
+<% @privileges.each do |privilege| %>
+	<% @flag = false %>
+	<% if action_name == "edit" %>
+		<!-- #TODO refactor -->
+		<% @group_privileges.each do |group_privilege|
+			if group_privilege.id == privilege.id
+				@flag = true
+				break
+			else
+				@flag = false
+			end
+		end %>
+	<% end %>
+
+	<% if @flag %>
+		<label>
+			<%= check_box_tag 'privilege_ids[]', privilege.id , :checked => "checked" %>
+			<%= h privilege.name %>
+		</label>
+	<% else %>
+		<label>
+			<%= check_box_tag 'privilege_ids[]', privilege.id %>
+			<%= h privilege.name %>
+		</label>
+	<% end %>
+<% end %>
+<br/>

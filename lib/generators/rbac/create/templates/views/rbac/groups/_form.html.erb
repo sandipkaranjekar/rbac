@@ -1,0 +1,35 @@
+<%= form_for(@group) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %><br/>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :privileges %><br/>
+    <%= render "privilege_fields" %>
+  </div>
+  <div>
+    <label>
+      <%= f.check_box :is_active %>Is active
+    </label>
+  </div>
+  <div>
+    <%= f.submit "Submit" %>
+    <%= link_to 'Back', rbac_groups_path %>
+  </div>
+<% end %>

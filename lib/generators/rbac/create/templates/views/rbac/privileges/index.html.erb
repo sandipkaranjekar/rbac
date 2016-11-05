@@ -1,0 +1,35 @@
+<div>
+  <h3>Privileges</h3>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Controller</th>
+        <th>Action</th>
+        <th>Is active</th>
+        <th colspan="3">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @privileges.each do |privilege| %>
+        <tr>
+          <td><%= privilege.name %></td>
+          <td><%= privilege.description %></td>
+          <td><%= privilege.controller %></td>
+          <td><%= privilege.action %></td>
+          <td><%= privilege.is_active %></td>
+          <td>
+            <%= link_to 'Show', privilege %>
+            <%= link_to 'Edit', edit_rbac_privilege_path(privilege) %>
+            <%= link_to 'Delete', privilege, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New privilege', new_rbac_privilege_path %>
+</div>

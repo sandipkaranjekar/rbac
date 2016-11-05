@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @privilege.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @privilege.description %>
+</p>
+
+<p>
+  <strong>Controller:</strong>
+  <%= @privilege.controller %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @privilege.action %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @privilege.is_active %>
+</p>
+
+<%= link_to 'Edit', edit_rbac_privilege_path(@privilege) %> |
+<%= link_to 'Back', rbac_privileges_path %>
