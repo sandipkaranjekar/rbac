@@ -23,7 +23,9 @@ module Rbac
       def add_association
         line = "class User < ActiveRecord::Base"
         gsub_file 'app/models/user.rb', /(#{Regexp.escape(line)})/mi do |match|
-          "#{match}\n # User - Role many-to-many relationship\n has_many :roles, :through => :role_user\n has_many :role_user, dependent: :delete_all\n"
+          "#{match}\n # User - Role many-to-many relationship\n 
+                      has_many :roles, :through => :role_user, class_name: 'Rbac::Role'\n
+                      has_many :role_user, dependent: :delete_all, class_name: 'Rbac::RoleUser'\n"
         end 
       end
     end
