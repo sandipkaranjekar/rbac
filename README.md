@@ -1,8 +1,7 @@
 # Rbac
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rbac`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+RBAC (Role Based Access Control) gem useful to enable your Rails application with the power of RBAC.
+This gem is helpful to maintain roles, groups and privileges at database table level. You have user interface to manage the roles, groups and privileges.This gem is applicable in the area where you need a multiple roles and privileges. it will fulfeel all your needs.
 
 ## Installation
 
@@ -19,6 +18,28 @@ And then execute:
 Or install it yourself as:
 
     $ gem install rbac
+    
+As this gem is database based access control system, so need to run:
+
+    $ rails g rbac:migration
+
+after this -
+
+    $ rake db:migrate
+
+To setup user interface and backend for RBAC you need to run following generator. It will create necessary controllers, views, models and association.
+
+*Note - Before this your Rails application have User model*
+
+	$ rails g rbac:create
+
+## Pre-requisites
+This gem work with User model only. Generator of this gem add association for User model. In further development we will integrate this with any authentication gem.
+
+## Concept
+In this there is strong association between user, role, group and privilege. 
+* User and Role model have many-to-many association
+  
 
 ## Usage
 
