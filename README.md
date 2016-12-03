@@ -1,8 +1,7 @@
 # Rbac
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rbac`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+RBAC (Role Based Access Control) gem useful to enable your Rails application with the power of RBAC.
+This gem is helpful to maintain roles, groups and privileges at database table level. You have user interface to manage the roles, groups and privileges.This gem is applicable in the area where you need a multiple roles and privileges. It will fulfil all your needs.
 
 ## Installation
 
@@ -14,26 +13,83 @@ gem 'rbac'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install rbac
+    
+As this gem is database based access control system, so need to run:
+
+    $ rails g rbac:migration
+
+after this -
+
+    $ rake db:migrate
+
+To setup user interface and backend for RBAC you need to run following generator. It will create necessary controllers, views, models, routes, helper method and associations.
+
+*Note - Before this your Rails application have User model*
+
+	$ rails g rbac:create
+
+## Pre-requisites
+This gem work with User model only. Generator of this gem add association for User model. In further development we will integrate this with any authentication gem.
+
+## Concept
+In this there is strong relationship between user, role, group and privilege. 
+* User and Role model have many-to-many association
+	User can have multiple roles and Role can have multiple users associated. It's as per your requirements, for this you need to associate roles with user in your add/update users controller/view.
+	
+	For example -
+  <html>
+    <h4>New/Edit user</h4>
+    <form>
+      <lable>Name</lable>
+      <input type="text" name="name" />
+      <lable>Email</lable>
+      <input type="text" name="email" />
+      <lable>Roles</lable>
+      <input type="checkbox" name="role[]" /> Superadmin<br/>
+      <input type="checkbox" name="role[]" /> Admin<br/>
+      <input type="checkbox" name="role[]" /> User<br/>
+      <input type="submit" />
+    </form>
+  </html>
+  
+* Role and Group model have many-to-many association
+	Here group is set of privileges group together while creating role, user need to assign groups to the role. So automatically privileges associated with this group get assigned to role (indirectly to user).
+  You can access Role and Group UI -
+  * http://{host_url}/rbac/roles
+  * http://{host_url}/rbac/groups
+  
+* Group and Privilege model have many-to-many association
+  Here Group can have multiple privileges and privilege belongs to many groups. You need to first set privileges with controller and action. If you select privilege under group it will be accessable to role.
+  All privileges are controller and action based.You should have controller and action to set privilege.
+  You can access Privilege UI -
+  * http://{host_url}/rbac/privileges
 
 ## Usage
+Here you will have one helper method to check role have access to that resource.
+```ruby
+has_permission(user, controller, action)
+```
+user = Logged in user active record object
+controller = For which controller that resource belong
+action = Action of controller which we need to check for having permission
 
-TODO: Write usage instructions here
+This method return *true* and *false*. Accordingly you can make a decision.
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rbac. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
+For example - 
+```ruby
+# In view
+<% if has_permission(user, "users", "show") %>
+  <%= link_to 'Show', user %>
+<% end %>
+```
+## TODO
+* Support API application means has_permission should work with api permission granting.
+* Integrate with authentication gem.
 
 ## License
 
