@@ -42,20 +42,7 @@ In this there is strong relationship between user, role, group and privilege.
 	User can have multiple roles and Role can have multiple users associated. It's as per your requirements, for this you need to associate roles with user in your add/update users controller/view.
 	
 	For example -
-  <html>
-    <h4>New/Edit user</h4>
-    <form>
-      <lable>Name</lable>
-      <input type="text" name="name" />
-      <lable>Email</lable>
-      <input type="text" name="email" />
-      <lable>Roles</lable>
-      <input type="checkbox" name="role[]" /> Superadmin<br/>
-      <input type="checkbox" name="role[]" /> Admin<br/>
-      <input type="checkbox" name="role[]" /> User<br/>
-      <input type="submit" />
-    </form>
-  </html>
+  	![alt text](https://raw.githubusercontent.com/sandipkaranjekar/rbac/master/images/user_form.png "User new/edit form")
   
 * Role and Group model have many-to-many association
 	Here group is set of privileges group together while creating role, user need to assign groups to the role. So automatically privileges associated with this group get assigned to role (indirectly to user).
