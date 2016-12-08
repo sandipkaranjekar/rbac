@@ -1,4 +1,5 @@
-# Rbac
+# RBAC (Role Based Access Control)
+[![Gem Version](https://badge.fury.io/rb/rbac.svg)](https://badge.fury.io/rb/rbac)
 
 RBAC (Role Based Access Control) gem useful to enable your Rails application with the power of RBAC.
 This gem is helpful to maintain roles, groups and privileges at database table level. You have user interface to manage the roles, groups and privileges.This gem is applicable in the area where you need a multiple roles and privileges. It will fulfil all your needs.
